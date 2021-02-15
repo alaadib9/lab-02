@@ -1,0 +1,20 @@
+img {
+    height: 300px;
+    width: 300px;
+
+}
+
+.temp-select{
+    display: none;
+}
+
+
+
+.photo-template{
+    display: none;
+}
+
+
+h2,p{
+    margin: 1%;
+}

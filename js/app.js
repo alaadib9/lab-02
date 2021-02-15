@@ -1,11 +1,18 @@
 'use strict';
 
-function Animals(image_url, title, description, keywords, horns) {
+var keywards=[];
+var animalsArray=[];
+
+var uniqueNames=["narwhal","rhino","unicorn","unilego","triceratops","markhor","mouflon","addax","chameleon","lizard","dragon"];
+
+function Animals(image_url, title, description, keyword, horns) {
     this.image_url = image_url;
     this.title = title;
     this.description = description;
-    this.keywords = keywords;
+    this.keyword = keyword;
     this.horns = horns;
+    
+    animalsArray.push(this);
 }
 
 Animals.prototype.render = function () {
@@ -17,7 +24,6 @@ Animals.prototype.render = function () {
     $('main').append(animalsTemp);
 
 }
-
 
 Animals.readJson = () => {
     const ajaxSettings = {
@@ -32,13 +38,46 @@ Animals.readJson = () => {
                 element.image_url,
                 element.title,
                 element.description,
-                element.keywords, element.horns);
+                element.keyword, element.horns);
             newAnimals.render();
+            keywards.push(element.keyword);
         });
+
     });
 }
 
 $(() => Animals.readJson());
+
+
+selectList();
+options();
+
+function selectList() {
+    
+    for (let index = 0; index < uniqueNames.length; index++) {
+        var select=$('.temp-select').clone();
+        select.attr('value', uniqueNames[index]);
+        select.text(uniqueNames[index]);
+        select.removeClass('temp-select');
+        $('select').append(select);
+    }
+}
+
+function options() {
+    $('#select').on('change',function() {
+        $('main').children().not(':first-child').remove();
+        for (let index = 0; index < animalsArray.length; index++) {
+            if (this.value ===animalsArray[index].keyword) {
+                animalsArray[index].render();
+            }
+            
+        }
+    })
+    
+}
+
+
+ 
 
 
 

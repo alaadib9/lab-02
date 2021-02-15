@@ -1,0 +1,31 @@
+main{
+    margin-left: 50px;
+}
+
+select{
+    padding: 10px 32px;
+    background-color: rgb(250, 246, 241);
+    text-align: center;
+    font-size: x-large;
+}
+
+section{
+    margin: 1%;
+    padding: 2%;
+    height: 370px;
+    width: 370px;
+    display: inline-block;
+    background-color: rgb(250, 246, 241);
+    border-radius: 15%;
+
+}
+
+
+h1{
+    font-size: 400%;
+    font-weight: bolder;
+    margin: 3%;
+    font-family: 'Josefin Sans', sans-serif;
+    border: solid black;
+    padding: 2%;
+}

@@ -4,28 +4,5 @@
 @import '../css/modules.css';
 
 
-*{
-    text-align: center;
-}
 
-img {
-    height: 300px;
-    width: 300px;
 
-}
-
-section{
-    margin-top: 2%;
-    padding: 0%;
-    height: 350px;
-    width: 350px;
-    display: inline-block;
-}
-
-.photo-template{
-    display: none;
-}
-
-main{
-    margin-left: 50px;
-}

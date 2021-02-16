@@ -55,22 +55,22 @@ Number and name of feature:3
 
 Estimate of time needed to complete: 1 hour
 
-Start time: 
+Start time: 6:30
 
-Finish time: 
+Finish time: 7:00
 
-Actual time needed to complete: 
+Actual time needed to complete: 30 mins
 
 _____________________________________________________________
 Number and name of feature: 4
 
 Estimate of time needed to complete:2
 
-Start time: 
+Start time: 6:30
 
-Finish time: 
+Finish time: -
 
-Actual time needed to complete:
+Actual time needed to complete:not completed
 
 
 

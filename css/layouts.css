@@ -1,12 +1,5 @@
 main{
-    margin-left: 50px;
-}
-
-select{
-    padding: 10px 32px;
-    background-color: rgb(250, 246, 241);
-    text-align: center;
-    font-size: x-large;
+    margin-left: 50px;   
 }
 
 div{
@@ -18,14 +11,42 @@ div{
     background-color: rgb(250, 246, 241);
     border-radius: 15%;
 
+
 }
 
 
 h1{
-    font-size: 400%;
-    font-weight: bolder;
-    margin: 3%;
+  margin-top: 1%;
+    margin-bottom: 3%;
     font-family: 'Josefin Sans', sans-serif;
     border: solid black;
-    padding: 2%;
+    padding: 3%;
+    font-size:30px;
+    background-image: linear-gradient(to top ,#bb7e7e 5% , #142353 95% );
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color :transparent;
 }
+
+button , select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    text-decoration: none;
+    height: 70%;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+     background: #ffffff8e;
+    color: rgb(0, 0, 0); 
+}
+button:hover , select:hover {
+    background: rgb(211, 125, 175);
+    opacity: 0.4;
+    transition: all 0.5s ease;
+}
+

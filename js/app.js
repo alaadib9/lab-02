@@ -3,7 +3,7 @@
 var keywards=[];
 var animalsArray=[];
 
-var uniqueNames=["narwhal","rhino","unicorn","unilego","triceratops","markhor","mouflon","addax","chameleon","lizard","dragon"];
+var uniqueNames=["selectAll","narwhal","rhino","unicorn","unilego","triceratops","markhor","mouflon","addax","chameleon","lizard","dragon"];
 
 function Animals(image_url, title, description, keyword, horns) {
     this.image_url = image_url;
@@ -69,6 +69,13 @@ function options() {
         for (let index = 0; index < animalsArray.length; index++) {
             if (this.value ===animalsArray[index].keyword) {
                 animalsArray[index].render();
+            }
+            
+        }
+
+        for (let i = 0; i < animalsArray.length; i++) {
+            if (this.value==='selectAll') {
+                    animalsArray[i].render();
             }
             
         }

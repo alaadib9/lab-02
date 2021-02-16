@@ -50,6 +50,7 @@ Animals.readJson1 = () => {
             
         });
     });
+    options();
 
 }
 
@@ -75,6 +76,7 @@ Animals.readJsonPage2 = () => {
         });
        
     });
+    options();
 
 }
 
@@ -84,27 +86,29 @@ $(() => Animals.readJson1());
 
 
 ////////////////////////select list Item////////////////////////
-selectList(uniqueNames);
+selectList();
 
 
 
-function selectList(array) {
+function selectList() {
     
-    for (let index = 0; index < array.length; index++) {
+    
+
+    for (let index = 0; index < animalsArray.length; index++) {
         var select=$('.temp-select').clone();
-        select.attr('value', array[index]);
-        select.text(array[index]);
+        select.attr('value', animalsArray[index]);
+        select.text(animalsArray[index]);
         select.removeClass('temp-select');
         $('select').append(select);
     }
 }
 
 /////////////////option for select items/////////////////////////
+// options();
 
-options();
 function options() {
     $('#select').on('change',function() {
-        $('main').children().not(':first-child').remove();
+        $('main').children().remove();
         for (let index = 0; index < animalsArray.length; index++) {
             if (this.value ===animalsArray[index].keyword) {
                 animalsArray[index].render();
@@ -138,6 +142,7 @@ function options() {
 $('#pageOne').on('click',function () {
     $('#main').empty();
     Animals.readJson1();
+    $('select').empty();
     selectList(uniqueNames);
 });
 
@@ -171,6 +176,7 @@ $('#horns').on('click',function () {
         
     }
 });
+
 
 
 

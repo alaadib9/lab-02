@@ -122,6 +122,7 @@ console.log(animalsArray);
 
 $('#pageTwo').on('click',function () {
     $('#main').empty();
+    $('')
 
     Animals.readJsonPage2();
 });

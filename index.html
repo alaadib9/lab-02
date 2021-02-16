@@ -14,20 +14,17 @@
 <body>
   <header>
     <h1>The Gallery of Horns</h1>
-    <nav>
-      <!-- <button  type="button" value="page-one">
-      <button id="pageTwo" type="button"value="page-Two"> -->
-        <button id="pageOne" type="button">Page One</button>
-        <button id="pageTwo" type="button">Page two</button>
-        <button id="sort" type="button">sort by Horns</button>
-    </nav>
-
-    <select id='select'>
-      <option value="default" class="temp-select">Filter by keyword</option>
-    </select>
-
+    
   </header>
 
+  <nav>
+    <button id="pageOne" type="button">Page One</button>
+    <button id="pageTwo" type="button">Page two</button>
+    <button id="sort" type="button">sort by Horns</button>
+  </nav>
+<select id='select'>
+  <option value="default" class="temp-select">Filter by keyword</option>
+</select>
     <template id="templateId" type="text/x-tmpl-mustache">
       <div class= "photo-template">
         <h2>{{title}}</h2>
@@ -35,8 +32,9 @@
         <p>{{description}}</p>
       </div>
     </template>
-   
-  <main id="main">
+<!--    
+    <input id="title" type="button" value="Sort by Title"></input>
+  <main id="main"> -->
 
   </main>
 

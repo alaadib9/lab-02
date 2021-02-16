@@ -1,10 +1,10 @@
 'use strict';
 
-var keywards=[];
-var animalsArray=[];
-var hornsArray=[];
+var keywards = [];
+var animalsArray = [];
+var hornsArray = [];
 
-var uniqueNames=["selectAll","narwhal","rhino","unicorn","unilego","triceratops","markhor","mouflon","addax","chameleon","lizard","dragon"];
+var uniqueNames = ["selectAll", "narwhal", "rhino", "unicorn", "unilego", "triceratops", "markhor", "mouflon", "addax", "chameleon", "lizard", "dragon"];
 
 function Animals(image_url, title, description, keyword, horns) {
     this.image_url = image_url;
@@ -12,15 +12,15 @@ function Animals(image_url, title, description, keyword, horns) {
     this.description = description;
     this.keyword = keyword;
     this.horns = horns;
-    
+
     animalsArray.push(this);
     hornsArray.push(this);
-///here we stopped
+    ///here we stopped
 }
 
 Animals.prototype.render = function () {
-    let template= $('#templateId').html();
-    let x= Mustache.render(template,this);
+    let template = $('#templateId').html();
+    let x = Mustache.render(template, this);
     $('#main').append(x);
 }
 
@@ -31,18 +31,18 @@ Animals.readJson1 = () => {
     };
 
     $.ajax('./data/page-1.json', ajaxSettings)
-    .then(data => {
-        data.forEach(element => {
-            let newAnimals = new Animals(
-                element.image_url,
-                element.title,
-                element.description,
-                element.keyword, element.horns);
-            newAnimals.render();
-            keywards.push(element.keyword);
-        });
+        .then(data => {
+            data.forEach(element => {
+                let newAnimals = new Animals(
+                    element.image_url,
+                    element.title,
+                    element.description,
+                    element.keyword, element.horns);
+                newAnimals.render();
+                keywards.push(element.keyword);
+            });
 
-    });
+        });
 
 }
 
@@ -54,18 +54,18 @@ Animals.readJsonPage2 = () => {
     };
 
     $.ajax('./data/page-2.json', ajaxSettings)
-    .then(data => {
-        data.forEach(element => {
-            let newAnimals = new Animals(
-                element.image_url,
-                element.title,
-                element.description,
-                element.keyword, element.horns); 
-            newAnimals.render();
-            keywards.push(element.keyword);
-        });
+        .then(data => {
+            data.forEach(element => {
+                let newAnimals = new Animals(
+                    element.image_url,
+                    element.title,
+                    element.description,
+                    element.keyword, element.horns);
+                newAnimals.render();
+                keywards.push(element.keyword);
+            });
 
-    });
+        });
 
 }
 
@@ -77,9 +77,9 @@ selectList(uniqueNames);
 options();
 ///I changed the select list function 
 function selectList(array) {
-    
+
     for (let index = 0; index < array.length; index++) {
-        var select=$('.temp-select').clone();
+        var select = $('.temp-select').clone();
         select.attr('value', array[index]);
         select.text(array[index]);
         select.removeClass('temp-select');
@@ -88,45 +88,78 @@ function selectList(array) {
 }
 
 function options() {
-    $('#select').on('change',function() {
+    $('#select').on('change', function () {
         $('main').children().not(':first-child').remove();
         for (let index = 0; index < animalsArray.length; index++) {
-            if (this.value ===animalsArray[index].keyword) {
+            if (this.value === animalsArray[index].keyword) {
                 animalsArray[index].render();
-            } 
+            }
         }
 
         for (let i = 0; i < animalsArray.length; i++) {
-            if (this.value==='selectAll') {
-                    animalsArray[i].render();
-            } 
+            if (this.value === 'selectAll') {
+                animalsArray[i].render();
+            }
         }
     })
-    
+
 }
 
 
-function compare(a,b) {
-    return a-b;
-}
+// function compare(a,b) {
+//     return a-b;
+// }
 
-hornsArray.sort(compare);
+// hornsArray.sort(compare);
 
 
 
-$('#pageOne').on('click',function () {
+// let titleSort = () => {
+//     animalsArray.forEach(() => {
+//         animalsArray.sort((a, b) => {
+//             if (a.title < b.title) {
+//                 return -1;
+//             }
+//             if (a.title > b.title) {
+//                 return 1;
+//             }
+//             return 0;
+//         });
+//         return animalsArray;
+//     });
+//     $('div').empty();
+
+// };
+
+// let hornSort = () => {
+//     animalsArray.forEach(() => {
+//         animalsArray.sort((a, b) => {
+//             return a.horns - b.horns;
+//         });
+//         return animalsArray;
+//     });
+//     $('div').remove();
+
+// };
+
+
+
+
+$('#pageOne').on('click', function () {
     $('#main').empty();
     Animals.readJson1();
 });
 console.log(animalsArray);
 
-$('#pageTwo').on('click',function () {
+$('#pageTwo').on('click', function () {
     $('#main').empty();
     $('')
 
     Animals.readJsonPage2();
 });
 
+$('#sort').on('click', hornSort);
+$('#title').on('click', titleSort);
 
 
 /// TODO sort by horns 

@@ -4,6 +4,17 @@
     font-family: 'Josefin Sans', sans-serif;
 }
 
-body {
-    background-color: rgba(179, 248, 225, 0.589);
+body{
+     background-color: rgb(255, 245, 253);
+}
+
+
+header {
+  
+height: 100px;
+display: flex;
+justify-content: center;
+text-align: center;
+font-size: 33px;
+
 }

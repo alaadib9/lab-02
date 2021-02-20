@@ -162,4 +162,3 @@ $('#title').on('click',function () {
 });
     animalsArray.forEach(value => value.render());
 });
-

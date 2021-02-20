@@ -1,11 +1,11 @@
 'use strict';
 
-var keywards=[];
+var keywords=[];
 var animalsArray=[];
-var hornsArray=[1,2,3,100];
 
 
-var uniqueNames=["selectAll","narwhal","rhino","unicorn","unilego","triceratops","markhor","mouflon","addax","chameleon","lizard","dragon","jackalope","horn","Rhino","Music","giraffe","saiga"];
+//////////////////Constructor////////////////////////////////
+
 
 function Animals(image_url, title, description, keyword, horns) {
     this.image_url = image_url;
@@ -15,16 +15,17 @@ function Animals(image_url, title, description, keyword, horns) {
     this.horns = horns;
     
     animalsArray.push(this);
-    // hornsArray.push(this.horns);
-
+    keywords.push(this.keyword);
 }
+
+
+//////////////////Rendering////////////////////////////////
 
 Animals.prototype.render = function () {
     let template= $('#templateId').html();
     let x= Mustache.render(template,this);
     $('#main').append(x);
 }
-
 
 
 ////////////////////////////read JSON//////////////////////
@@ -38,6 +39,8 @@ Animals.readJson1 = () => {
 
     $.ajax('./data/page-1.json', ajaxSettings)
     .then(data => {
+        keywords = [];
+        animalsArray  = [];
         data.forEach(element => {
             let newAnimals = new Animals(
                 element.image_url,
@@ -46,11 +49,11 @@ Animals.readJson1 = () => {
                 element.keyword, 
                 element.horns);
             newAnimals.render();
-            keywards.push(element.keyword);
             
         });
+        selectList();
+        options();
     });
-    options();
 
 }
 
@@ -63,6 +66,8 @@ Animals.readJsonPage2 = () => {
 
     $.ajax('./data/page-2.json', ajaxSettings)
     .then(data => {
+        keywords = [];
+        animalsArray  = [];
         data.forEach(element => {
             let newAnimals = new Animals(
                 element.image_url,
@@ -74,9 +79,9 @@ Animals.readJsonPage2 = () => {
             newAnimals.render();
 
         });
-       
+        selectList();
+        options();
     });
-    options();
 
 }
 
@@ -86,25 +91,21 @@ $(() => Animals.readJson1());
 
 
 ////////////////////////select list Item////////////////////////
-selectList();
-
-
 
 function selectList() {
-    
-    
-
-    for (let index = 0; index < animalsArray.length; index++) {
-        var select=$('.temp-select').clone();
-        select.attr('value', animalsArray[index]);
-        select.text(animalsArray[index]);
-        select.removeClass('temp-select');
-        $('select').append(select);
-    }
+    let unique = [];
+    $.each(keywords, function(index,value) {
+        if($.inArray(value, unique)  === -1) unique.push(value);
+    });
+    unique.forEach(value => {
+        $('#select').append(`<option value="${value}" class="selectAll">${value}</option>`);
+    })
 }
 
-/////////////////option for select items/////////////////////////
-// options();
+
+
+
+////////////////////event listener///////////////////////
 
 function options() {
     $('#select').on('change',function() {
@@ -112,13 +113,9 @@ function options() {
         for (let index = 0; index < animalsArray.length; index++) {
             if (this.value ===animalsArray[index].keyword) {
                 animalsArray[index].render();
-            } 
-        }
-
-        for (let i = 0; i < animalsArray.length; i++) {
-            if (this.value==='selectAll') {
-                    animalsArray[i].render();
-            } 
+            } else if (this.value==='selectAll') {
+                animalsArray[index].render();
+            }
         }
 
     })
@@ -126,69 +123,43 @@ function options() {
 }
 
 
-/////////////////compare function/////////////////////////
-// function compare(a,b) {
-//     return a-b;
-// }
-
-// hornsArray.sort(compare);
-
-// console.log(hornsArray);
-
-
-
-////////////////////event listener///////////////////////
 
 $('#pageOne').on('click',function () {
-    $('#main').empty();
+    $('#main').children().remove();
+    $('select').children().not(':first-child').remove();
     Animals.readJson1();
-    $('select').empty();
-    selectList(uniqueNames);
+
 });
 
-
-// console.log(animalsArray);
 
 $('#pageTwo').on('click',function () {
-    $('#main').empty();
-    $('select').empty();
-    selectList(uniqueNames);
+    $('#main').children().remove();
+    $('select').children().not(':first-child').remove();
     Animals.readJsonPage2();
-    console.log(animalsArray);
 });
+
+
+
 
 /////////////////////////sort/////////////////////
 
-
-
 $('#horns').on('click',function () {
-    Animals.readJsonPage2();
-    console.log(animalsArray);
-    console.log(hornsArray);
-    $('#main').empty();
-    for (var i = 0; i < hornsArray.length; i++) {
-       for (var index = 0; index < animalsArray.length; index++) {
-           if ( hornsArray[i] == animalsArray[index].horns) {
-               animalsArray[index].render();
-           }  
-        }
-           
-        
-    }
+    $('#main').children().remove();
+    animalsArray.sort((a,b) => b.horns-a.horns);
+    animalsArray.forEach(value => value.render());
 });
 
 
+$('#title').on('click',function () {
+    $('#main').children().remove();
+    animalsArray.sort((a,b) =>{ 
+    if (a.title < b.title) {
+        return -1;
+    }else if (a.title > b.title){
+        return 1;
+    }
+    return 0;
+});
+    animalsArray.forEach(value => value.render());
+});
 
-
-
-
-
-
-
-
-
-
-
-
-/// TODO sort by horns 
-/// TODO list  
